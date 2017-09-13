@@ -96,10 +96,10 @@ http {
     location @<%= location %> {
       rewrite ^<%= location %>/?(.*)$ <%= hash['path'] %>/$1 break;
       # can reuse variable set above
+      proxy_set_header Host       $host;
       proxy_pass $<%= hash['name'] %>;
       proxy_ssl_server_name on;
-      #proxy_set_header Host   $host;
-      #proxy_set_header X-Forwarded-For $remote_addr;
+      # proxy_set_header X-Forwarded-For $remote_addr;
 
       <% %w(http https).each do |scheme| %>
       proxy_redirect <%= hash["redirect_#{scheme}"] %> <%= location %>;
