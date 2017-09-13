@@ -100,7 +100,7 @@ http {
       proxy_ssl_server_name on;
       proxy_set_header X-Forwarded-For $remote_addr;
       proxy_cookie_domain <%= hash['host'] %> $host;
-      proxy_redirect <%= hash["redirect_https"] %> <%= location %>;
+      proxy_redirect <%= hash["redirect_https"] %> $scheme$host/;
     }
   <% end %>
 
